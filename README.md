@@ -24,8 +24,9 @@ A visualization of our 3D metric-semantic map constructed based on recordings fr
 <!-- ![3Dmap](https://github.com/PRBonn/SIMP/blob/master/resources/3dmap.png) -->  
 
 Qualitative results for the localization approach evaluated on the constructed map above
+<p align="center">
 <img src="https://github.com/PRBonn/SIMP/blob/master/resources/traj.png" width="512"/>
-
+</p>
 
 ## Code
 Coming soon!
