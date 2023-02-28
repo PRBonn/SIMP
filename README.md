@@ -18,7 +18,7 @@ Our live demos for both localization and mapping on the Dingo-O platform can see
 [![](http://img.youtube.com/vi/z5VKtl3Vyyw/0.jpg)](https://www.youtube.com/watch?v=z5VKtl3Vyyw "SIMP")
 
 A visualization of our 3D metric-semantic map constructed based on recordings from our building
-<img src="https://github.com/PRBonn/SIMP/blob/master/resources/3dmap.png" width="128"/>
+<img src="https://github.com/PRBonn/SIMP/blob/master/resources/3dmap.png" width="512"/>
 <!-- ![3Dmap](https://github.com/PRBonn/SIMP/blob/master/resources/3dmap.png) -->  
 
 Qualitative results for the localization approach evaluated on the constructed map above
