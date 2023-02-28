@@ -20,7 +20,7 @@ For the quantitative evaluation, we collected data for 9 months, traversing our 
 A visualization of our 3D metric-semantic map, and qualitative results for the localization approach evaluated on our map
 <p align="center">
 <img src="https://github.com/PRBonn/SIMP/blob/master/resources/3dmap.png" width="384"/>
-<img src="https://github.com/PRBonn/SIMP/blob/master/resources/traj.png" width="390"/>
+<img src="https://github.com/PRBonn/SIMP/blob/master/resources/traj.png" width="384"/>
 </p>
 
 ## Code
