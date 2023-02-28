@@ -20,6 +20,9 @@ Our live demos for both localization and mapping on the Dingo-O platform can see
 A visualization of our 3D metric-semantic map constructed based on recordings from our building
 ![3Dmap](https://github.com/PRBonn/SIMP/blob/master/resources/3dmap.png)
 
+Qualitative results for the localization approach evaluated on the constructed map above
+![traj](https://github.com/PRBonn/SIMP/blob/master/resources/traj.png)
+
 
 ## Code
 Coming soon!
