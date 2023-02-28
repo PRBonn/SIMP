@@ -17,16 +17,10 @@ We will release an open-source C++/ROS implementation of our approach.
 Our live demos for both localization and mapping on the Dingo-O platform can seen in the following video:
 [![](http://img.youtube.com/vi/z5VKtl3Vyyw/0.jpg)](https://www.youtube.com/watch?v=z5VKtl3Vyyw "SIMP")
 
-A visualization of our 3D metric-semantic map constructed based on recordings from our building
+A visualization of our 3D metric-semantic map, and qualitative results for the localization approach evaluated on the map
 <p align="center">
 <img src="https://github.com/PRBonn/SIMP/blob/master/resources/3dmap.png" width="384"/>
-<img src="https://github.com/PRBonn/SIMP/blob/master/resources/traj.png" width="384"/>
-</p>
-<!-- ![3Dmap](https://github.com/PRBonn/SIMP/blob/master/resources/3dmap.png) -->  
-
-Qualitative results for the localization approach evaluated on the constructed map above
-<p align="center">
-<img src="https://github.com/PRBonn/SIMP/blob/master/resources/traj.png" width="512"/>
+<img src="https://github.com/PRBonn/SIMP/blob/master/resources/traj.png" width="390"/>
 </p>
 
 ## Code
