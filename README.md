@@ -16,6 +16,7 @@ We will release an open-source C++/ROS implementation of our approach.
 ## Results
 Our live demos for both localization and mapping on the Dingo-O platform can seen in the following video:
 [![](http://img.youtube.com/vi/z5VKtl3Vyyw/0.jpg)](https://www.youtube.com/watch?v=z5VKtl3Vyyw "SIMP")
+
 The Dingo-O is mounted with Intel NUC10i7FNK and NVidia Jetson Xavier AGX, both running Ubuntu 20.04. Both mapping and localization can be executed onboard of the Dingo.
 
 For the quantitative evaluation, we collected data for 9 months, traversing our entire floor. Our data collection platform is a Kuka YouBot, and we recorded 4 RGB camera streams, ground truth poses and wheel odometry. We used a 30-minutes long sequence to construct an object-based map of our lab, enriching our floor plan with geometric and semantic information. We then localized on challenging sequences, spanning over 9 months, which include dynamics such a humans and changes to the furniture. 
