@@ -24,7 +24,7 @@ A visualization of our 3D metric-semantic map, and qualitative results for the l
 </p>
 
 ## Code
-Coming soon!
+Will be published on 21.03.2023.
 
 ## Citation
 Coming soon!
