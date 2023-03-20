@@ -67,6 +67,12 @@ To see everything is built correctly, run the tests from the build directory
 ```bash
 ./bin/NMCLUnitTests
 ```
+To build the ROS wrapper for ROS Noetic
+```bash
+cd SIMP/ros1_ws
+catkin_make
+source devel/setup.bash 
+```
 You will also need to install [Omni3D & Cube R-CNN](https://github.com/FullMetalNicky/omni3d). Please follow the installation guide, and make sure to **activate the cubercnn conda** environment every time you run our code. 
 
 ## Running the Algo
@@ -114,7 +120,10 @@ This node synchronizes the 3D object detections with the robot's current pose to
 * gtTopic - topic name for ground truth pose
 * dumpPath
 * jsonPath - path to .json file which includes cameras extrinsics and intrinsics, and algorithm parametrs
-The service /dump_map can be used to get a .pickle file of the mapped objects
+The service /dump_map can be used to get a .pickle file of the mapped objects. To run the mapping algorithm 
+```bash
+roslaunch omni3d_ros omni3d.launch
+```
 
 ### ConfigNMCLNode
 Requires as input 2 topics, Float32MultiArray with 3D object detections and Odometry from VO or wheel encoders. The topic names are configurable through the launch file. This runs the correct and predict steps asynchronously, so correct is executed whenever we have odometry and predict is executed when an observation arrives. ConfigNMCLNodE publishes PoseWithCovarianceStamped messages with the pose prediction. To see the predictions in RVIZ, run
