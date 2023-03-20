@@ -1,0 +1,77 @@
+<launch>
+
+<!-- Localization engine -->
+  <arg name="dataFolder" value ="/home/nickybones/Code/OmniNMCL/ncore/data/floor/ICPMap/"/>
+  <arg name="text" value ="false"/>
+<arg name="sem" value ="false"/>
+<arg name="test" value ="false"/>
+<arg name="roomseg" value ="false"/>
+<arg name="omni" value ="true"/>
+<arg name="roomSeg" value ="false"/>
+ <arg name="mapName" value ="Map"/>
+  <arg name="useLidar" value ="false"/>
+<param name="use_sim_time" value="false"/>
+<param name="mapName" value="$(arg mapName)"/>
+  <param name="useLidar" value="$(arg useLidar)"/>
+  <arg name="gtCSVPath" value="/home/nickybones/data/MCL/iros2023/R69/raw_gt.csv"/>
+
+  <param name="dataFolder" value="$(arg dataFolder)"/>
+  <param name="nmclconfig" value="nmcl.config"/>
+  
+  <param name="scanTopic" value="/ScanMergeNode/scan_merged"/>
+  <param name="odomTopic" value="/dingo_velocity_controller/odom"/>
+  <param name="mapTopic" value="map"/>
+  <param name="textTopic" value="/text"/>
+  <param name="dsFactor" value="1"/>
+  <param name="triggerDist" value="0.1"/>
+  <param name="triggerAngle" value="0.03"/>
+  <rosparam param="odomNoise">[0.15, 0.15, 0.15]</rosparam>
+  <rosparam param="odomWeights">[1.0]</rosparam>
+  <param name="maskTopic" value="masked_scan"/>
+  <param name="poseTopic" value="/NMCLPose"/>
+  <param name="baseLinkTF" value="base_link"/>
+  <param name="configFolder" value="$(find nmcl_ros)/config/480x640/"/>
+  <param name="yoloTopic" value="/yolov5"/>
+  <param name="roomTopic" value="/room"/>
+  <param name="gtTopic" value="/GT"/>
+ <param name="omni3dTopic" value="omni3d"/>
+  <param name="particleTopic" value="Particles"/>
+  
+   <node pkg="nmcl_ros" type="ScanMergeNode" name="ScanMergeNode" output="screen">
+   <param name="configFolder" value="$(find nmcl_ros)/config/"/>
+  <param name="scanFrontTopic" value="/scan_front"/>
+  <param name="scanRearTopic" value="/scan_rear"/>
+  <param name="baseLinkTF" value="base_link"/>
+  </node>
+
+  <node pkg="nmcl_ros" type="ConfigNMCLNode" name="ConfigNMCLNode" output="screen">
+  </node>
+
+<group if="$(arg omni)">
+    <node pkg="omni3d_ros" type="Omni3DNode.py" name="Omni3DNode0" output="screen">
+   </node>
+</group>
+
+
+<group>
+ <node pkg="data_processing" type="GTBroadcastNode.py" name="GTBroadcastNode0" output="screen">
+  <param name="scanFrontTopic" value="/scan_front"/>
+  <param name="scanRearTopic" value="/scan_front"/>
+  <param name="gtCSVPath" value="$(arg gtCSVPath)"/>
+  </node>
+</group>
+
+
+<!-- visualization-->
+
+<group>
+ <param name="dataset" value="$(find yolov5_ros)/omnidataset.yaml"/>
+ <param name="markerTopic" value="markerTopic"/>
+ <node pkg="nmcl_ros" type="SemanticMapNode.py" name="SemanticMapNode0" output="screen"/>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg dataFolder)/0/Map.yaml" output="screen"/>
+
+ <node pkg="rviz" type="rviz" name="rviz" args="-d $(find nmcl_ros)/rviz/demo.rviz"/> 
+
+ </group>
+
+</launch>

@@ -1,0 +1,35 @@
+<launch>
+
+
+ <param name="omniTopic" value="fullomni3d"/>
+  <param name="gtTopic" value="gt"/>
+ <param name="jsonPath" value="$(find omni3d_ros)/configs/args.json"/>
+<param name="cameraTopic" value="/camera0/color/image_raw"/>
+
+  <node pkg="omni3d_ros" type="Omni3DMappingNode.py" name="Omni3DMappingNode0" output="screen">
+  <param name="configPath" value="$(find omni3d_ros)/configs/trained_Omni3D.yaml"/>
+   <param name="modelPath" value="$(find omni3d_ros)/trained_models/22_12_20_server_224/model_recent.pth"/>
+   </node>
+
+    <node pkg="omni3d_ros" type="GTNode.py" name="GTNode0" output="screen">
+    <param name="csvPath" value="/home/nickybones/data/MCL/omni3d/Map3/raw_icp.csv"/>
+   </node>
+
+       <node pkg="omni3d_ros" type="SIMPNode.py" name="SIMPNode0" output="screen">
+<param name="dumpPath" value="/home/nickybones/Code/OmniNMCL/ros1_ws/src/omni3d_ros/"/>
+   </node>
+
+
+   <!-- visualization-->
+<group>
+  <param name="dataFolder" value="$(find omni3d_ros)/configs/"/>
+ <param name="dataset" value="$(find omni3d_ros)/configs/omnidataset.yaml"/>
+ <param name="markerTopic" value="markerTopic"/>
+ <node pkg="nmcl_ros" type="SemanticMapNode.py" name="SemanticMapNode0" output="screen"/>
+
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find omni3d_ros)/configs/Map.yaml" output="screen"/>
+<node pkg="rviz" type="rviz" name="rviz" args="-d $(find omni3d_ros)/rviz/mapping.rviz"/> 
+</group>
+
+
+</launch>

@@ -1,0 +1,43 @@
+<launch>
+
+<!-- Localization engine -->
+  <arg name="dataFolder"/>
+
+  <param name="dataFolder" value="$(arg dataFolder)"/>
+  <param name="nmclconfig" value="nmcl.config"/>
+  <param name="odomTopic" value="/odom"/>
+  <param name="mapTopic" value="map"/>
+  <param name="triggerDist" value="0.1"/>
+  <param name="triggerAngle" value="0.03"/>
+  <rosparam param="odomNoise">[0.15, 0.15, 0.15]</rosparam>
+  <rosparam param="odomWeights">[1.0]</rosparam>
+  <param name="poseTopic" value="/NMCLPose"/>
+  <param name="baseLinkTF" value="base_link"/>
+  <param name="omni3dTopic" value="omni3d"/>
+  <param name="particleTopic" value="Particles"/>
+ <param name="jsonPath" value="$(find omni3d_ros)/configs/args.json"/>
+
+
+  <node pkg="nmcl_ros" type="ConfigNMCLNode" name="ConfigNMCLNode" output="screen">
+  </node>
+
+
+  <node pkg="omni3d_ros" type="Omni3DNode.py" name="Omni3DNode0" output="screen">
+    <rosparam param="cameraTopics">["/camera0/color/image_raw", "/camera1/color/image_raw", "/camera2/color/image_raw", "/camera3/color/image_raw"]</rosparam>
+     <param name="configPath" value="$(find omni3d_ros)/configs/trained_Omni3D.yaml"/>
+   <param name="modelPath" value="$(find omni3d_ros)/trained_models/22_12_20_server_224/model_recent.pth"/>
+  </node>
+
+
+
+<!-- visualization-->
+
+<group>
+<param name="dataset" value="$(find nmcl_ros)/omnidataset.yaml"/>
+ <param name="markerTopic" value="markerTopic"/>
+ <node pkg="nmcl_ros" type="SemanticMapNode.py" name="SemanticMapNode0" output="screen"/>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg dataFolder)/0/Map.yaml" output="screen"/>
+ <node pkg="rviz" type="rviz" name="rviz" args="-d $(find nmcl_ros)/rviz/Omni.rviz"/> 
+</group>
+
+</launch>

@@ -1,0 +1,92 @@
+<launch>
+
+<!-- Localization engine -->
+  <arg name="dataFolder"/>
+  <arg name="text"/>
+<arg name="sem"/>
+<arg name="test" value ="true"/>
+<arg name="roomseg"/>
+<arg name="omni"/>
+<arg name="roomSeg"/>
+ <arg name="mapName"/>
+ <arg name="csvPath"/>
+  <arg name="gtCSVPath"/>
+  <arg name="useLidar"/>
+
+<param name="use_sim_time" value="false"/>
+<param name="gtCSVPath" value="$(arg gtCSVPath)"/>
+<param name="csvPath" value="$(arg csvPath)"/>
+<param name="mapName" value="$(arg mapName)"/>
+  <param name="useLidar" value="$(arg useLidar)"/>
+
+
+  <param name="dataFolder" value="$(arg dataFolder)"/>
+  <param name="nmclconfig" value="nmcl.config"/>
+  
+  <param name="scanTopic" value="/ScanMergeNode/merged_scan"/>
+  <param name="odomTopic" value="/odom"/>
+  <param name="mapTopic" value="map"/>
+  <param name="textTopic" value="/text"/>
+  <param name="dsFactor" value="1"/>
+  <param name="triggerDist" value="0.1"/>
+  <param name="triggerAngle" value="0.03"/>
+  <rosparam param="odomNoise">[0.1, 0.1, 0.1]</rosparam>
+  <rosparam param="odomWeights">[1.0]</rosparam>
+  <param name="maskTopic" value="masked_scan"/>
+  <param name="poseTopic" value="/NMCLPose"/>
+  <param name="baseLinkTF" value="base_link"/>
+  <param name="configFolder" value="$(find nmcl_ros)/config/480x640/"/>
+  <param name="yoloTopic" value="/yolov5"/>
+  <param name="roomTopic" value="/room"/>
+  <param name="gtTopic" value="/GT"/>
+
+   <node pkg="nmcl_ros" type="ScanMergeNode2" name="ScanMergeNode" output="screen">
+   <param name="configFolder" value="$(find nmcl_ros)/config/"/>
+  <param name="scanFrontTopic" value="/scan_front"/>
+  <param name="scanRearTopic" value="/scan_rear"/>
+  <param name="baseLinkTF" value="base_link"/>
+  </node>
+
+  <node pkg="nmcl_ros" type="ConfigNMCLNode" name="ConfigNMCLNode" output="screen">
+  </node>
+
+<group if="$(arg omni)">
+    <node pkg="omni3d_ros" type="Omni3DNode.py" name="Omni3DNode0" output="screen">
+   </node>
+</group>
+
+
+
+
+<!-- visualization-->
+
+
+<group>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg dataFolder)/0/Map.yaml" output="screen"/>
+
+ <node pkg="rviz" type="rviz" name="rviz" args="-d $(find nmcl_ros)/rviz/Omni.rviz"/> 
+
+ 
+</group>
+<group>
+ <node pkg="data_processing" type="GTBroadcastNode.py" name="GTBroadcastNode0" output="screen">
+  <param name="scanFrontTopic" value="/scan_front"/>
+  <param name="scanRearTopic" value="/scan_rear"/>
+  <param name="gtCSVPath" value="$(arg gtCSVPath)"/>
+  </node>
+</group>
+
+<!-- testing -->
+<group if="$(arg test)">
+
+<node pkg="data_processing" type="MCLEvalNode.py" name="MCLEvalNode0" output="screen">
+   <param name="poseTopic" value="/NMCLPose"/>
+   <param name="csvPath" value="$(arg csvPath)"/>
+     <param name="particleTopic" value="/Particles"/>
+     <param name="syncSlop" value="0.05"/>
+  </node>
+
+
+</group>
+
+</launch>

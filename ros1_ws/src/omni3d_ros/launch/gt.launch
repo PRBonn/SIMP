@@ -1,0 +1,8 @@
+<launch>
+
+    <node pkg="omni3d_ros" type="GTNode.py" name="GTNode0" output="screen">
+    <param name="csvPath" value="/home/nickybones/data/MCL/omni3d/Map3/raw_gt.csv"/>
+    <param name="multiCam" value="false"/>
+   </node>
+
+</launch>

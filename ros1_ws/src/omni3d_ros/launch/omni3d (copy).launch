@@ -1,0 +1,11 @@
+<launch>
+
+  
+   <node name="image_view" pkg="image_view" type="image_view" respawn="false" output="screen">
+    <remap from="image" to="/omni3d_debug"/>
+    <param name="autosize" value="true" />
+  </node>
+
+  <node pkg="omni3d_ros" type="Omni3DNode.py" name="Omni3DNode0" output="screen">
+   </node>
+</launch>

@@ -1,0 +1,17 @@
+<launch>
+
+
+  <node pkg="omni3d_ros" type="BroadcastMapNode.py" name="BroadcastMapNode0" output="screen">
+   </node>
+
+
+
+   <!-- visualization-->
+<group>
+
+  <node name="map_server" pkg="map_server" type="map_server" args="/home/nickybones/Code/Omni3DDataset/Map.yaml" output="screen"/>
+<node pkg="rviz" type="rviz" name="rviz" args="-d $(find omni3d_ros)/rviz/broadcast.rviz"/> 
+</group>
+
+
+</launch>

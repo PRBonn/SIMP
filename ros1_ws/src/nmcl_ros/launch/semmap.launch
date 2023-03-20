@@ -1,0 +1,17 @@
+<launch>
+
+<!-- Localization engine -->
+  <arg name="dataFolder"/>
+  <param name="dataFolder" value="$(arg dataFolder)"/>
+  <param name="data" value="/home/nickybones/Code/yolov5/dataset.yaml"/>
+  <param name="mapName" value="SMap"/>
+  <param name="markerTopic" value="markerTopic"/>
+
+ <node pkg="nmcl_ros" type="SemanticMapNode.py" name="SemanticMapNode0" output="screen"/>
+
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg dataFolder)SMap.yaml" output="screen"/>
+
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find nmcl_ros)/rviz/semmap.rviz"/>
+
+
+</launch>
