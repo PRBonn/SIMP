@@ -39,42 +39,7 @@
 #include "BuildingMap.h"
 #include "SemanticOverlap.h"
 
-std::string dataPath = PROJECT_TEST_DATA_DIR + std::string("/8/");
-std::string testPath = PROJECT_TEST_DATA_DIR + std::string("/test/floor/");
-std::string simplePath = PROJECT_TEST_DATA_DIR + std::string("/test/8Map/");
-
-
-
-// TEST(TestSemanticOverlap, test1)
-// {
-// 	std::string jsonPath = testPath + "building.config";
-//     BuildingMap bm(jsonPath);
-
-// 	std::vector<std::string> classNames = {"sink", "door", "oven", "whiteboard", "table", "cardboard", "plant", "drawers", "sofa", "storage"};
-// 	std::vector<float>  confidencees = {0.7, 0.5, 0.7, 0.7, 0.6, 0.7, 0.7, 0.7, 0.8, 0.7};
-	
-// 	SemanticOverlap so(std::make_shared<BuildingMap>(bm), classNames, confidencees);
-
-// 	std::vector<Particle> particles = {Particle(Eigen::Vector3f(0.8812799511953672, -8.271243499175455, -0.2627709493472913))};
-
-// 	std::vector<Eigen::Vector3f> cube = {Eigen::Vector3f(1.51886392,  0.3281844,  -0.61634958), Eigen::Vector3f(2.3157413,   0.41586283, -0.57145405),
-// 	Eigen::Vector3f( 2.27966356,  0.39294341,  0.11367157), Eigen::Vector3f( 1.48278618,  0.30526498,  0.06877604),
-// 	Eigen::Vector3f( 1.6948123,  -1.24868035, -0.6598351 ), Eigen::Vector3f( 2.49168968, -1.16100192, -0.61493957),
-// 	Eigen::Vector3f( 2.45561194, -1.18392134,  0.07018611),Eigen::Vector3f( 1.65873456, -1.27159977,  0.02529058)};
-// 	std::vector<std::vector<Eigen::Vector3f>> vertices;
-// 	vertices.push_back(cube);
-
-// 	std::vector<int>  labels = {4};
-// 	std::vector<float> confidences = {0.8914895296096802};
-
-// 	Semantic3DData data(labels, vertices, confidences);
-// 	so.ComputeWeights(particles, std::make_shared<Semantic3DData>(data));
-// 	//std::cout << particles[0].weight << std::endl;
-// 	ASSERT_GE(particles[0].weight, 0.5);
-
-	
-// }
-
+std::string testPath = PROJECT_TEST_DATA_DIR + std::string("/floor/GTMap/");
 
 
 
@@ -269,29 +234,14 @@ TEST(TestSetStatistics, test3)
 
 TEST(TestNMCLFactory, test1)
 {
-	std::string configPath = testPath + "nmcltest.config";
-	NMCLFactory::Dump(configPath);
-
-	std::shared_ptr<ReNMCL> renmcl = NMCLFactory::Create(configPath);
-	std::string roonName = renmcl->GetFloorMap()->GetRoomNames()[15];
-	//std::cout << renmcl->GetFloorMap()->GetRoomNames()[1] << std::endl;
-
-
-	ASSERT_EQ(roonName, "Room 1");
-	//ASSERT(ups);
-
-}
-
-TEST(TestNMCLFactory, test2)
-{
 	std::string configPath = testPath + "nmcl.config";
 	//NMCLFactory::Dump(configPath);
 
 	std::shared_ptr<ReNMCL> renmcl = NMCLFactory::Create(configPath);
-	std::string roonName = renmcl->GetFloorMap()->GetRoomNames()[15];
+	std::string roonName = renmcl->GetFloorMap()->GetRoomNames()[1];
 	//std::cout << renmcl->GetFloorMap()->GetRoomNames()[1] << std::endl;
 
-	ASSERT_EQ(roonName, "Room 1");
+	ASSERT_EQ(roonName, "0");
 }
 
 
