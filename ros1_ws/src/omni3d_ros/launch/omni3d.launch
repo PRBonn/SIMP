@@ -25,8 +25,9 @@
   <param name="dataFolder" value="$(find omni3d_ros)/configs/"/>
  <param name="dataset" value="$(find omni3d_ros)/configs/omnidataset.yaml"/>
  <param name="markerTopic" value="markerTopic"/>
+ <!--
  <node pkg="nmcl_ros" type="SemanticMapNode.py" name="SemanticMapNode0" output="screen"/>
-
+-->
   <node name="map_server" pkg="map_server" type="map_server" args="$(find omni3d_ros)/configs/Map.yaml" output="screen"/>
 <node pkg="rviz" type="rviz" name="rviz" args="-d $(find omni3d_ros)/rviz/mapping.rviz"/> 
 </group>

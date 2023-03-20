@@ -4,6 +4,7 @@ from GMAP import GMAP
 import cv2
 import yaml
 import rospy
+import os
 from sensor_msgs.msg import Image 
 from cv_bridge import CvBridge 
 import matplotlib.pyplot as plt
@@ -24,6 +25,10 @@ class SemanticMapNode():
 		mapName = "Map"
 		semFolder = dataFolder + "SemMaps/"
 		markerTopic = rospy.get_param('markerTopic')
+
+		if os.path.isdir(dataFolder + "/0/"):
+			dataFolder = dataFolder + "/0/"
+
 
 
 		publisher = rospy.Publisher(markerTopic, MarkerArray)
