@@ -73,11 +73,11 @@ cd SIMP/ros1_ws
 catkin_make
 source devel/setup.bash 
 ```
-You will also need to install [Omni3D & Cube R-CNN](https://github.com/FullMetalNicky/omni3d). Please follow the installation guide, and make sure to **activate the cubercnn conda** environment every time you run our code. 
+You will also need to install [Omni3D & Cube R-CNN](https://github.com/FullMetalNicky/omni3d). Please follow the installation guide, and make sure to **activate the cubercnn conda** environment every time you run our code. Place the omni3d folder in `SIMP/ros1_ws/src/` because the ROS nodes are expecting it to be there.
 
 ## Running the Algo
 
-We use ROS wrappers to run the algorithm. Please notice that the path to the Omni3D & Cube R-CNN folder is hardcoded in some of the nodes, so you'll have to adjust it to your installation path.
+We use ROS wrappers to run the algorithm. 
 
 ### Omni3DNode
 Listens to Image topics, and broadcasts a Float32MultiArray topic, which includes the 3D bounding box, semantic class and confidence score for every detected object.
