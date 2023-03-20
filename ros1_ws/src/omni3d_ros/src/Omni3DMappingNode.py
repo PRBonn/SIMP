@@ -28,7 +28,9 @@ from MapObjectTracker import MapObjectTracker
 from scipy.spatial.transform import Rotation as R
 
 
-sys.path.append(os.path.abspath('/home/nickybones/Code/omni3d/'))
+sys.path.append(os.path.join(sys.path[0],'../../omni3d/'))
+print(sys.path)
+
 from detectron2.checkpoint import DetectionCheckpointer
 from detectron2.config import get_cfg
 from detectron2.engine import default_argument_parser, default_setup, launch
