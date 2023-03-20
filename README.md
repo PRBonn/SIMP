@@ -77,7 +77,7 @@ You will also need to install [Omni3D & Cube R-CNN](https://github.com/FullMetal
 
 ## Running the Algo
 
-We use ROS wrappers to run the algorithm. 
+We use ROS wrappers to run the algorithm. Please notice that the path to the Omni3D & Cube R-CNN folder is hardcoded in some of the nodes, so you'll have to adjust it to your installation path.
 
 ### Omni3DNode
 Listens to Image topics, and broadcasts a Float32MultiArray topic, which includes the 3D bounding box, semantic class and confidence score for every detected object.
