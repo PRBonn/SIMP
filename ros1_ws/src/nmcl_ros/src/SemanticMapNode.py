@@ -19,7 +19,7 @@ class SemanticMapNode():
 	def __init__(self)->None:
 
 		data = rospy.get_param('dataset')
-		dataFolder = rospy.get_param('dataFolder') + "0/"
+		dataFolder = rospy.get_param('dataFolder') 
 		#mapName = rospy.get_param('mapName')
 		mapName = "Map"
 		semFolder = dataFolder + "SemMaps/"
