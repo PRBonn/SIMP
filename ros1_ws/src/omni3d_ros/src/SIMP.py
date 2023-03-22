@@ -653,7 +653,7 @@ class SIMP():
 
 			im_rendered, fragment = renderer(meshes_scenes)
 			im_rendered = im_rendered.cpu().numpy()
-			im = np.zeros((480, 640 * cam_num, 3), dtype=np.float)
+			im = np.zeros((480, 640 * cam_num, 3), dtype=np.float64)
 			for c in range(cam_num):
 				im[:, c*640:(c+1)*640, :] = im_rendered[c, :, :, :3]
 
