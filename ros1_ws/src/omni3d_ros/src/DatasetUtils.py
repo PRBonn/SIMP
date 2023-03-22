@@ -10,7 +10,6 @@ import matplotlib.patches as patches
 import torch 
 import pandas as pd
 from MapObjectTracker import MapObjectTracker
-from sympy import *
 from scipy.spatial import ConvexHull
 from typing import Tuple, List
 import math

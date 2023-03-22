@@ -1,5 +1,4 @@
 import numpy as np
-from filterpy.kalman import KalmanFilter
 import open3d as o3d
 import pandas as pd 
 from scipy.spatial.transform import Rotation as R
@@ -23,18 +22,12 @@ class MapObjectTracker():
 		self.skip = skip
 		self.uid = MapObjectTracker.uid
 		self.conf = conf
-		self.kf = KalmanFilter(dim_x=7, dim_z=7)
 		self.static = static
 		self.active = 1
 		self.inactive = 0
 		self.room = room
 		self.volume = self.dim[0] * self.dim[1] * self.dim[2] 
-		#self.kf.x = np.array([self.center_mu[0], self.center_mu[1], self.center_mu[2], self.dim_mu[0], self.dim_mu[1], self.dim_mu[2], self.yaw_mu])
-		# self.kf.P = covariance.P[category]
-		# self.kf.Q = covariance.Q[category]
-		# self.kf.R = covariance.R[category] # model noise
-		#self.kf.F = np.eye((7,7))     # state transition matrix
-		#self.kf.H = np.eye((7,7)) # measurement function
+		
 
 		MapObjectTracker.uid += 1
 
