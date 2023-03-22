@@ -74,7 +74,8 @@ catkin_make
 source devel/setup.bash 
 ```
 You will also need to install [Omni3D & Cube R-CNN](https://github.com/FullMetalNicky/omni3d). Please follow the installation guide, and make sure to **activate the cubercnn conda** environment every time you run our code. Place the omni3d folder in `SIMP/ros1_ws/src/` because the ROS nodes are expecting it to be there.
-If you wish to run Omni3D & Cube R-CNN on NVidia Jetson Xavier AGX, you can use the Docker we provide. We don't provide a Docker for desktop installation. 
+If you wish to run Omni3D & Cube R-CNN on NVidia Jetson Xavier AGX, you can use the Docker we provide. 
+We also provide an experiemntal Noetic docker, but it hasn't been tested much. 
 
 ## Running the Algo
 
