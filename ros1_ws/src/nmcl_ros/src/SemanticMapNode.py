@@ -23,11 +23,12 @@ class SemanticMapNode():
 		dataFolder = rospy.get_param('dataFolder') 
 		#mapName = rospy.get_param('mapName')
 		mapName = "Map"
-		semFolder = dataFolder + "SemMaps/"
 		markerTopic = rospy.get_param('markerTopic')
 
-		if os.path.isdir(dataFolder + "/0/"):
-			dataFolder = dataFolder + "/0/"
+		if os.path.isdir(dataFolder + "0/"):
+			dataFolder = dataFolder + "0/"
+
+		semFolder = dataFolder + "SemMaps/"
 
 
 
@@ -49,14 +50,6 @@ class SemanticMapNode():
 		classCnt = len(semclasses)
 		clr = cm.rainbow(np.linspace(0, 1, len(semclasses)))
 
-		# colors = cm.rainbow(np.linspace(0, 1, 20))
-		# clrarr = np.linspace(0.0, 20.0, num=14, endpoint=False).astype("int")
-		# clr = [colors[i] for i in range(len(clrarr))]
-
-		# colors = get_cmap('tab20').colors
-		# clrarr = np.linspace(0.0, 20.0, num=14, endpoint=False).astype("int")
-		# print(clrarr)
-		# clr = [colors[i] for i in range(len(clrarr))]
 
 		objects = []
 
