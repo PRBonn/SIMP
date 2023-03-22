@@ -666,7 +666,8 @@ def getComposedTransformOmni(origin, gt, pose, R):
     pose_ = pose
     pose_[3] = 1
     
-    pose_ = np.array([pose], dtype=np.float32).T
+ 
+    pose_ = np.array([[pose[0].item(), pose[1].item(), pose[2].item(), pose[3]]], dtype=np.float32).T
     new_pose = T_inv @ pose_
 
     T = np.eye(4)
