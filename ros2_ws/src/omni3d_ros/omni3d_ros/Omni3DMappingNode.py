@@ -9,6 +9,7 @@ from collections import OrderedDict
 import torch
 import cv2
 import json
+import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image 
 from cv_bridge import CvBridge 
@@ -27,9 +28,6 @@ from scipy.spatial import ConvexHull
 from MapObjectTracker import MapObjectTracker
 from scipy.spatial.transform import Rotation as R
 
-
-sys.path.append(os.path.join(sys.path[0],'../../omni3d/'))
-print(sys.path)
 
 from detectron2.checkpoint import DetectionCheckpointer
 from detectron2.config import get_cfg

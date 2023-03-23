@@ -2,6 +2,7 @@
 
 import cv2
 import pandas as pd
+import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image 
 from geometry_msgs.msg import PoseStamped
