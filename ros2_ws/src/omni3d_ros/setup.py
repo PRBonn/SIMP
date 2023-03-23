@@ -16,6 +16,7 @@ setup(
         (os.path.join('share', package_name), glob('configs/*')),
         (os.path.join('share', package_name), glob('trained_models/*')),
         (os.path.join('lib', package_name), glob('omni3d_ros/*'))
+        (os.path.join('lib', package_name), glob('omni3d/*'))
     ],
     install_requires=['setuptools'],
     zip_safe=True,
