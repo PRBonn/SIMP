@@ -5,6 +5,8 @@
 <arg name="jsonPath" default="$(find-pkg-share omni3d_ros)/configs/args.json"/>
 <arg name="omniTopic" default="fullomni3d"/>
 
+<node pkg="rviz2" exec="rviz2" name="rviz2" output="screen" args="-d $(find-pkg-share omni3d_ros)/rviz/mapping.rviz">
+</node>
 
 <node pkg="omni3d_ros" exec="GTNode" name="GTNode">
   <param name="csvPath" value="/SIMP/data/raw_gt.csv"/> 
@@ -28,6 +30,14 @@
    <param name="configPath" value="$(find-pkg-share omni3d_ros)/configs/trained_Omni3D.yaml"/>
 </node>
 
-  <executable cmd="ros2 bag play /SIMP/data/2023-01-31-16-48-15_0/" output="screen" />
+  <executable cmd="ros2 bag play /SIMP/data/2023-01-17-19-06-59_12/" output="screen" />
+
+ <executable cmd="ros2 run nav2_util lifecycle_bringup map_server" output="screen" />
+
+<node name="map_server" pkg="nav2_map_server" exec="map_server" output="screen">
+ <param name="yaml_filename" value="$(find-pkg-share omni3d_ros)/configs/Map.yaml"/>
+</node>
+
+
 
 </launch>

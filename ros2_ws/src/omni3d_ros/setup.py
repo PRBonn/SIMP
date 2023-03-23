@@ -40,7 +40,7 @@ setup(
     name=package_name,
     version='0.0.0',
     packages=[package_name],
-    data_files=package_files(data_files, ['models/', 'launch/', 'configs/', 'omni3d/' ], ['share', 'share', 'share', 'lib', 'lib' ]),
+    data_files=package_files(data_files, ['models/', 'launch/', 'configs/', 'rviz/', 'omni3d/' ], ['share', 'share', 'share', 'share', 'lib' ]),
 
     #     (os.path.join('share', package_name), glob('launch/*.launch')),
     #     (os.path.join('share', package_name), glob('configs/*')),

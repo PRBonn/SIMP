@@ -6,6 +6,7 @@ import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image 
 from geometry_msgs.msg import PoseStamped
+from rclpy.duration import Duration
 
 from std_msgs.msg import UInt16, Float32MultiArray
 from nmcl_msgs.msg import Omni3D, Omni3DArray
@@ -97,14 +98,14 @@ class SIMPNode(Node):
 			marker.pose.orientation.y = q[1]
 			marker.pose.orientation.z = q[2]
 			marker.pose.orientation.w = q[3]
-			marker.scale.x = obj.dim[2]
-			marker.scale.y = obj.dim[1]
-			marker.scale.z = obj.dim[0]
+			marker.scale.x = float(obj.dim[2])
+			marker.scale.y = float(obj.dim[1])
+			marker.scale.z = float(obj.dim[0])
 			marker.color.a = 0.8
 			marker.color.r = color[2]
 			marker.color.g = color[1]
 			marker.color.b = color[0]
-			marker.lifetime = rospy.Duration()
+			marker.lifetime = Duration().to_msg()
 
 			markers.append(marker)
 

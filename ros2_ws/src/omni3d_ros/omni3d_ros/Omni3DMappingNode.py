@@ -11,6 +11,8 @@ import cv2
 import json
 import rclpy
 from rclpy.node import Node
+from rclpy.duration import Duration
+from rclpy.time import Time
 from sensor_msgs.msg import Image 
 from cv_bridge import CvBridge 
 from message_filters import ApproximateTimeSynchronizer, Subscriber
@@ -257,7 +259,7 @@ class Omni3DMappingNode(Node):
             marker.color.r = color[2]
             marker.color.g = color[1]
             marker.color.b = color[0]
-            marker.lifetime = rospy.Duration(3)
+            marker.lifetime = Duration(seconds=3).to_msg()
 
             markers.append(marker)
 
@@ -425,7 +427,7 @@ class Omni3DMappingNode(Node):
             # if (self.cnt % 5):
             #     return
 
-            self.get_logger().info("Omni3DMappingNode::Callback!")
+            #self.get_logger().info("Omni3DMappingNode::Callback!")
 
             start = time.time()
             debug_img = self.infer(cam0_msg)
@@ -433,7 +435,7 @@ class Omni3DMappingNode(Node):
             #print("inference time ", end - start)
 
             image_msg = self.bridge.cv2_to_imgmsg(debug_img, encoding='bgr8')
-            image_msg.header.stamp =  Time.from_msg(cam0_msg.header.stamp).nanoseconds
+            image_msg.header.stamp =  cam0_msg.header.stamp
             self.pred_pub_debug.publish(image_msg)
             
             msg = Float32MultiArray()
@@ -519,11 +521,11 @@ class Omni3DMappingNode(Node):
                 m_xy = xyz[:4]
 
                 omni_msg = Omni3D()
-                omni_msg.center = center.flatten()
+                omni_msg.center = list(center.flatten())
                 omni_msg.dim = dim
-                omni_msg.rot = rot.flatten()
-                omni_msg.category = category
-                omni_msg.confidence = conf
+                omni_msg.rot = list(rot.flatten())
+                omni_msg.category = int(category)
+                omni_msg.confidence = float(conf)
                 omniArray.append(omni_msg)   
 
                 detc = xyz.flatten()
