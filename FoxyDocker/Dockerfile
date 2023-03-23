@@ -46,12 +46,12 @@ RUN apt-add-repository universe
 RUN apt-add-repository multiverse
 RUN apt-add-repository restricted
 
+WORKDIR /SIMP
 
 RUN pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu113
 RUN pip install 'git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI'
 RUN pip install opencv-python
 
-WORKDIR /packages
 RUN git clone https://github.com/facebookresearch/detectron2.git &&  cd detectron2 && ls && pip install -e .
 RUN pip install fvcore iopath
 RUN curl -LO https://github.com/NVIDIA/cub/archive/1.10.0.tar.gz
@@ -93,10 +93,8 @@ RUN apt-get update && \
     apt-get install -y nlohmann-json3-dev libgtest-dev libeigen3-dev vim ros-foxy-tf-transformations && \
     rm -rf /var/lib/apt/lists/*
 RUN pip install transforms3d
-RUN git clone https://github.com/PRBonn/SIMP.git
-RUN cd SIMP/ncore && mkdir build && cd build && cmake .. -DBUILD_TESTING=1 && make -j12 
-RUN cd SIMP/ros2_ws/src/omni3d_ros/ && git clone https://github.com/FullMetalNicky/omni3d
-RUN cd SIMP/ros2_ws/src/omni3d_ros/ && mkdir trained_models/ && cd trained_models/ \
+RUN cd ncore && mkdir build && cd build && cmake .. -DBUILD_TESTING=1 && make -j12 
+RUN cd ros2_ws/src/omni3d_ros/ && git clone https://github.com/FullMetalNicky/omni3d
+RUN cd ros2_ws/src/omni3d_ros/ && mkdir models/ && cd models/ \
 && curl -LO https://www.ipb.uni-bonn.de/html/projects/simp/model_recent.pth
-RUN /bin/bash -c '. /opt/ros/foxy/setup.bash; cd SIMP/ros2_ws; colcon build'
-
+RUN /bin/bash -c '. /opt/ros/foxy/setup.bash; cd ros2_ws; colcon build'
