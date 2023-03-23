@@ -26,6 +26,8 @@ from DatasetUtils import get_cuboid_verts_faces, convert_3d_box_to_2d, getTrunc2
 from matplotlib import cm
 from scipy.spatial import ConvexHull
 
+sys.path.append(os.path.join(sys.path[0],'/omni3d/'))
+print(sys.path)
 
 from detectron2.checkpoint import DetectionCheckpointer
 from detectron2.config import get_cfg
