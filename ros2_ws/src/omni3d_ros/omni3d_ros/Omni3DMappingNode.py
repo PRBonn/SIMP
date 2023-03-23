@@ -119,8 +119,8 @@ def parse():
         nargs=argparse.REMAINDER,
     )
 
-    args, _ = parser.parse_args()
-    args.opts = ['MODEL.WEIGHTS', '']
+    args, _ = parser.parse_known_args()
+    #args.opts = ['MODEL.WEIGHTS', '']
 
    # print("Command Line Args:", args)
 
@@ -182,6 +182,7 @@ class Omni3DMappingNode(Node):
         self.model = build_model(cfg)
         
         #logger.info("Model:\n{}".format(self.model))
+        #self.get_logger().info("Model:\n{}".format(self.model))
         DetectionCheckpointer(self.model, save_dir=cfg.OUTPUT_DIR).resume_or_load(
             cfg.MODEL.WEIGHTS, resume=True
         )
@@ -216,15 +217,15 @@ class Omni3DMappingNode(Node):
         self.detections = []
         self.cnt = 0
 
-        self.pred_pub = self.create_publisher(Float32MultiArray, "omni3d", queue_size=1)
-        self.pred_pub_debug = self.create_publisher(Image, 'omni3d_debug', queue_size=1)
-        self.marker_pub = self.create_publisher(MarkerArray, 'omni3dMarkerTopic', queue_size=1)
-        self.full_pred_pub = self.create_publisher(Omni3DArray, omniTopic, queue_size=1)
+        self.pred_pub = self.create_publisher(Float32MultiArray, "omni3d", 1)
+        self.pred_pub_debug = self.create_publisher(Image, 'omni3d_debug', 1)
+        self.marker_pub = self.create_publisher(MarkerArray, 'omni3dMarkerTopic', 1)
+        self.full_pred_pub = self.create_publisher(Omni3DArray, omniTopic, 1)
         self.sub = self.create_subscription(Image, cameraTopic, self.callback, 1)
        
         self.clr = cm.rainbow(np.linspace(0, 1, 14))
 
-        rospy.loginfo("Omni3DNode::Ready!")
+        self.get_logger().info("Omni3DMappingNode::Ready!")
 
 
     def createMarkers(self, mapObjs):
@@ -424,6 +425,8 @@ class Omni3DMappingNode(Node):
             # if (self.cnt % 5):
             #     return
 
+            self.get_logger().info("Omni3DMappingNode::Callback!")
+
             start = time.time()
             debug_img = self.infer(cam0_msg)
             end = time.time()
@@ -564,12 +567,12 @@ class Omni3DMappingNode(Node):
         
         
 
-def main(args):
-    rclpy.init(args=None)
+def main(args=None):
+    rclpy.init(args=args)
     args = parse()
     omni3dmapping_node = Omni3DMappingNode(args)
 
-    rclpy.spin(minimomni3dmapping_nodeal_publisher)
+    rclpy.spin(omni3dmapping_node)
 
     # Destroy the node explicitly
     # (optional - otherwise it will be done automatically

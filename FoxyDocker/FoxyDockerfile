@@ -46,8 +46,6 @@ RUN apt-add-repository universe
 RUN apt-add-repository multiverse
 RUN apt-add-repository restricted
 
-WORKDIR /SIMP
-
 RUN pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu113
 RUN pip install 'git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI'
 RUN pip install opencv-python
@@ -57,10 +55,6 @@ RUN pip install fvcore iopath
 RUN curl -LO https://github.com/NVIDIA/cub/archive/1.10.0.tar.gz
 RUN tar xzf 1.10.0.tar.gz
 ENV CUB_HOME=$PWD/cub-1.10.0
-#RUN git clone https://github.com/facebookresearch/pytorch3d.git
-#RUN cd pytorch3d && FORCE_CUDA=1 pip install -e .
-#RUN pip install cython scipy seaborn
-#RUN git clone https://github.com/facebookresearch/omni3d.git
 RUN pip install --no-index --no-cache-dir pytorch3d -f https://dl.fbaipublicfiles.com/pytorch3d/packaging/wheels/py38_cu113_pyt1120/download.html
 RUN pip install cython scipy seaborn open3d 
 
@@ -92,8 +86,12 @@ RUN apt-get update -q && \
 RUN apt-get update && \
     apt-get install -y nlohmann-json3-dev libgtest-dev libeigen3-dev vim ros-foxy-tf-transformations && \
     rm -rf /var/lib/apt/lists/*
-RUN pip install transforms3d
+RUN pip install transforms3d 
+#COPY ncore ncore
+RUN git clone https://github.com/PRBonn/SIMP.git
+WORKDIR /SIMP
 RUN cd ncore && mkdir build && cd build && cmake .. -DBUILD_TESTING=1 && make -j12 
+#COPY ros2_ws ros2_ws
 RUN cd ros2_ws/src/omni3d_ros/ && git clone https://github.com/FullMetalNicky/omni3d
 RUN cd ros2_ws/src/omni3d_ros/ && mkdir models/ && cd models/ \
 && curl -LO https://www.ipb.uni-bonn.de/html/projects/simp/model_recent.pth

@@ -7,7 +7,7 @@
 
 
 <node pkg="omni3d_ros" exec="GTNode" name="GTNode">
-  <param name="csvPath" value="/packages/data/raw_gt.csv"/> 
+  <param name="csvPath" value="/SIMP/data/raw_gt.csv"/> 
  <param name="gtTopic" value="$(var gtTopic)"/> 
   <param name="jsonPath" value="$(var jsonPath)"/>
    <param name="cameraTopic" value="$(var cameraTopic)"/>
@@ -17,7 +17,7 @@
   <param name="omniTopic" value="$(var omniTopic)"/> 
  <param name="gtTopic" value="$(var gtTopic)"/> 
   <param name="jsonPath" value="$(var jsonPath)"/>
-   <param name="dumpPath" value="/packages/SIMP/"/>
+   <param name="dumpPath" value="/SIMP/"/>
 </node>
 
 <node pkg="omni3d_ros" exec="Omni3DMappingNode" name="Omni3DMappingNode">
@@ -28,5 +28,6 @@
    <param name="configPath" value="$(find-pkg-share omni3d_ros)/configs/trained_Omni3D.yaml"/>
 </node>
 
+  <executable cmd="ros2 bag play /SIMP/data/2023-01-31-16-48-15_0/" output="screen" />
 
 </launch>
