@@ -92,7 +92,9 @@ def parse():
     parser = argparse.ArgumentParser(
         epilog=None, formatter_class=argparse.RawDescriptionHelpFormatter,
     )
-    parser.add_argument(" --ros-args -r" , default="")
+    parser.add_argument("--ros-args" , default="")
+    parser.add_argument("-r" , default="")
+
     parser.add_argument("--config-file", default="", metavar="FILE", help="path to config file")
     #parser.add_argument('--input-folder',  type=str, help='list of image folders to process', required=True)
     parser.add_argument("--threshold", type=float, default=0.25, help="threshold on score for visualizing")
