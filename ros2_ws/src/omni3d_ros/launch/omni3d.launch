@@ -1,0 +1,32 @@
+<launch>
+
+<arg name="gtTopic" default="GT"/>
+<arg name="cameraTopic" default="/camera0/color/image_raw"/>
+<arg name="jsonPath" default="$(find-pkg-share omni3d_ros)/args.json"/>
+<arg name="omniTopic" default="fullomni3d"/>
+
+
+<node pkg="omni3d_ros" exec="GTNode" name="GTNode">
+  <param name="csvPath" value="/home/nickybones/data/MCL/omni3d/Map3/raw_gt.csv"/> 
+ <param name="gtTopic" value="$(var gtTopic)"/> 
+  <param name="jsonPath" value="$(var jsonPath)"/>
+   <param name="cameraTopic" value="$(var cameraTopic)"/>
+</node>
+
+<node pkg="omni3d_ros" exec="SIMPNode" name="SIMPNode">
+  <param name="omniTopic" value="$(var omniTopic)"/> 
+ <param name="gtTopic" value="$(var gtTopic)"/> 
+  <param name="jsonPath" value="$(var jsonPath)"/>
+   <param name="dumpPath" value="/home/nickybones/Code/SIMP/"/>
+</node>
+
+<node pkg="omni3d_ros" exec="Omni3DMappingNode" name="Omni3DMappingNode">
+  <param name="omniTopic" value="$(var omniTopic)"/> 
+   <param name="cameraTopic" value="$(var cameraTopic)"/>
+ <param name="modelPath" value="$(find-pkg-share omni3d_ros)/model_recent.pth"/> 
+  <param name="jsonPath" value="$(var jsonPath)"/>
+   <param name="configPath" value="$(find-pkg-share omni3d_ros)/trained_Omni3D.yaml"/>
+</node>
+
+
+</launch>

@@ -1,0 +1,19 @@
+_BASE_: "Base.yaml"
+SOLVER:
+  TYPE: "sgd"
+  IMS_PER_BATCH: 12
+  BASE_LR: 0.0015
+  STEPS: (3340800, 4454400)
+  MAX_ITER: 5568000
+  WARMUP_ITERS: 174000
+TEST:
+  EVAL_PERIOD: 2500
+VIS_PERIOD: 2320
+DATASETS:
+  TRAIN: ('Hypersim_train', 'Hypersim_val')
+  TEST: ('Hypersim_test',) 
+  CATEGORY_NAMES: ('sink', 'door', 'oven', 'board', 'table', 'box', 'potted plant', 'drawers', 'sofa', 'cabinet', 'chair', 'fire extinguisher', 'person', 'desk') # ('chair', 'table', 'cabinet', 'car', 'lamp', 'books', 'sofa', 'pedestrian', 'picture', 'window', 'pillow', 'truck', 'door', 'blinds', 'sink', 'shelves', 'television', 'shoes', 'cup', 'bottle', 'bookcase', 'laptop', 'desk', 'cereal box', 'floor mat', 'traffic cone', 'mirror', 'barrier', 'counter', 'camera', 'bicycle', 'toilet', 'bus', 'bed', 'refrigerator', 'trailer', 'box', 'oven', 'clothes', 'van', 'towel', 'motorcycle', 'night stand', 'stove', 'fire extinguisher', 'chair', 'stationery', 'bathtub', 'cyclist', 'curtain', 'bin', 'poop')
+MODEL:
+  ROI_HEADS:
+    NUM_CLASSES: 14
+  WEIGHTS: 'cubercnn_DLA34_FPN.pth'

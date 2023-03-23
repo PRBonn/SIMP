@@ -1,0 +1,14 @@
+<launch>
+
+<arg name="gtTopic" default="GT"/>
+
+
+<node pkg="omni3d_ros" exec="GTNode" name="GTNode">
+  <param name="csvPath" value="/home/nickybones/data/MCL/omni3d/Map3/raw_gt.csv"/> 
+ <param name="gtTopic" value="$(var gtTopic)"/> 
+  <param name="jsonPath" value="$(find-pkg-share omni3d_ros)/args.json"/>
+   <param name="cameraTopic" value="/camera0/color/image_raw"/>
+</node>
+
+
+</launch>
