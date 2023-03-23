@@ -89,13 +89,14 @@ RUN apt-get update && \
 RUN pip install transforms3d 
 WORKDIR /SIMP
 COPY ncore ncore
-RUN cd ncore && mkdir build && cd build && cmake .. -DBUILD_TESTING=1 && make -j12 
 COPY ros2_ws ros2_ws
-#RUN cd ros2_ws/src/omni3d_ros/ && git clone https://github.com/FullMetalNicky/omni3d
-#RUN cd ros2_ws/src/omni3d_ros/ && mkdir models/ && cd models/ \
-#&& curl -LO https://www.ipb.uni-bonn.de/html/projects/simp/model_recent.pth
-RUN /bin/bash -c '. /opt/ros/foxy/setup.bash; cd ros2_ws; colcon build'
+RUN cd ncore && mkdir build && cd build && cmake .. -DBUILD_TESTING=1 && make -j12 
+SHELL ["/bin/bash", "-c"]
+RUN cd ros2_ws && \
+    . /opt/ros/foxy/setup.bash && \
+    colcon build
 
-#RUN touch .bashrc
-#CMD ". /opt/ros/foxy/setup.bash" >> .bashrc
-#CMD source .bashrc
+COPY ros2_entrypoint.sh /
+RUN chmod +x /ros2_entrypoint.sh
+ENTRYPOINT ["/ros2_entrypoint.sh"]
+CMD ["bash"]

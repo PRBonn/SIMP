@@ -87,11 +87,21 @@ RUN apt-get update && \
 WORKDIR /SIMP
 #RUN git clone https://github.com/PRBonn/SIMP.git
 COPY ncore ncore
-RUN cd SIMP/ncore && mkdir build && cd build && cmake .. -DBUILD_TESTING=1 && make -j12 
 COPY ros1_ws ros1_ws
-#RUN cd SIMP/ros1_ws/src && git clone https://github.com/FullMetalNicky/omni3d
 RUN pip install open3d
+
+RUN cd ncore && mkdir build && cd build && cmake .. -DBUILD_TESTING=1 && make -j12 
 #RUN /bin/bash -c '. /opt/ros/noetic/setup.bash; cd SIMP/ros1_ws; catkin_make'
 #RUN cd SIMP/ros1_ws/src/omni3d_ros/ && mkdir -p trained_models/22_12_20_server_224/ && cd trained_models/22_12_20_server_224/ \
 #&& curl -LO https://www.ipb.uni-bonn.de/html/projects/simp/model_recent.pth
 
+
+SHELL ["/bin/bash", "-c"]
+RUN cd ros1_ws && \
+    . /opt/ros/noetic/setup.bash && \
+    catkin_make
+
+COPY ros_entrypoint.sh /
+RUN chmod +x /ros_entrypoint.sh
+ENTRYPOINT ["/ros_entrypoint.sh"]
+CMD ["bash"]
