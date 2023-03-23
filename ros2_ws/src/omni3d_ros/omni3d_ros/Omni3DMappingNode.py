@@ -565,10 +565,10 @@ class Omni3DMappingNode(Node):
         
         
 
-def main(args=None):
-    rclpy.init(args=args)
-
-    omni3dmapping_node = Omni3DMappingNode()
+def main():
+    rclpy.init(args=None)
+    args = parse()
+    omni3dmapping_node = Omni3DMappingNode(args)
 
     rclpy.spin(minimomni3dmapping_nodeal_publisher)
 

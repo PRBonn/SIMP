@@ -408,10 +408,10 @@ class Omni3DNode(Node):
 
 
 
-def main(args=None):
-    rclpy.init(args=args)
-
-    omni3d_node = Omni3DNode()
+def main():
+    rclpy.init(args=None)
+    args = parse()
+    omni3d_node = Omni3DNode(args)
 
     rclpy.spin(omni3d_node)
 
