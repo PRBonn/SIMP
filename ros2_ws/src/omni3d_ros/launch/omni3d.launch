@@ -7,7 +7,7 @@
 
 
 <node pkg="omni3d_ros" exec="GTNode" name="GTNode">
-  <param name="csvPath" value="/home/nickybones/data/MCL/omni3d/Map3/raw_gt.csv"/> 
+  <param name="csvPath" value="/packages/data/raw_gt.csv"/> 
  <param name="gtTopic" value="$(var gtTopic)"/> 
   <param name="jsonPath" value="$(var jsonPath)"/>
    <param name="cameraTopic" value="$(var cameraTopic)"/>
@@ -17,7 +17,7 @@
   <param name="omniTopic" value="$(var omniTopic)"/> 
  <param name="gtTopic" value="$(var gtTopic)"/> 
   <param name="jsonPath" value="$(var jsonPath)"/>
-   <param name="dumpPath" value="/home/nickybones/Code/SIMP/"/>
+   <param name="dumpPath" value="/packages/SIMP/"/>
 </node>
 
 <node pkg="omni3d_ros" exec="Omni3DMappingNode" name="Omni3DMappingNode">
