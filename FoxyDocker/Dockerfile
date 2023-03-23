@@ -95,7 +95,7 @@ RUN apt-get update && \
 RUN pip install transforms3d
 RUN git clone https://github.com/PRBonn/SIMP.git
 RUN cd SIMP/ncore && mkdir build && cd build && cmake .. -DBUILD_TESTING=1 && make -j12 
-RUN cd SIMP/ros2_ws/src && git clone https://github.com/FullMetalNicky/omni3d
+RUN cd SIMP/ros2_ws/src/omni3d_ros/ && git clone https://github.com/FullMetalNicky/omni3d
 RUN cd SIMP/ros2_ws/src/omni3d_ros/ && mkdir trained_models/ && cd trained_models/ \
 && curl -LO https://www.ipb.uni-bonn.de/html/projects/simp/model_recent.pth
 RUN /bin/bash -c '. /opt/ros/foxy/setup.bash; cd SIMP/ros2_ws; colcon build'

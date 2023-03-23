@@ -92,8 +92,6 @@ def parse():
     parser = argparse.ArgumentParser(
         epilog=None, formatter_class=argparse.RawDescriptionHelpFormatter,
     )
-    parser.add_argument('-r', '--ros-args', default="")
-
     parser.add_argument("--config-file", default="", metavar="FILE", help="path to config file")
     #parser.add_argument('--input-folder',  type=str, help='list of image folders to process', required=True)
     parser.add_argument("--threshold", type=float, default=0.25, help="threshold on score for visualizing")
@@ -121,7 +119,7 @@ def parse():
         nargs=argparse.REMAINDER,
     )
 
-    args = parser.parse_args()
+    args, _ = parser.parse_args()
     args.opts = ['MODEL.WEIGHTS', '']
 
    # print("Command Line Args:", args)
@@ -170,9 +168,9 @@ class Omni3DMappingNode(Node):
         self.declare_parameter('cameraTopic')
         cameraTopic = self.get_parameter('cameraTopic').value
         self.get_logger().info("cameraTopic: %s" % (str(cameraTopic),))
-        self.declare_parameter('omni3dTopic')
-        omni3dTopic = self.get_parameter('omni3dTopic').value
-        self.get_logger().info("omni3dTopic: %s" % (str(omni3dTopic),))
+        self.declare_parameter('omniTopic')
+        omniTopic = self.get_parameter('omniTopic').value
+        self.get_logger().info("omniTopic: %s" % (str(omniTopic),))
 
        
         with open(jsonPath) as f:

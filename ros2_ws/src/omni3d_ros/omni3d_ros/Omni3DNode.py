@@ -117,7 +117,7 @@ def parse():
         nargs=argparse.REMAINDER,
     )
 
-    args = parser.parse_args()
+    args, _ = parser.parse_known_args()
     args.opts = ['MODEL.WEIGHTS', '']
 
    # print("Command Line Args:", args)
@@ -167,9 +167,9 @@ class Omni3DNode(Node):
         self.declare_parameter('cameraTopics')
         cameraTopics = self.get_parameter('cameraTopics').value
         self.get_logger().info("cameraTopics: %s" % (str(cameraTopics),))
-        self.declare_parameter('omni3dTopic')
-        omni3dTopic = self.get_parameter('omni3dTopic').value
-        self.get_logger().info("omni3dTopic: %s" % (str(omni3dTopic),))
+        self.declare_parameter('omniTopic')
+        omniTopic = self.get_parameter('omniTopic').value
+        self.get_logger().info("omniTopic: %s" % (str(omniTopic),))
 
         cameraTopics = ["/camera0/color/image_raw", "/camera1/color/image_raw", "/camera2/color/image_raw", "/camera3/color/image_raw"]
 
