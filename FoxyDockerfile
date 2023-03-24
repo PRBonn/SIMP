@@ -84,17 +84,19 @@ RUN apt-get update -q && \
 # Install our code
 
 RUN apt-get update && \
-    apt-get install -y nlohmann-json3-dev libgtest-dev libeigen3-dev vim ros-foxy-tf-transformations && \
+    apt-get install -y nlohmann-json3-dev libgtest-dev libeigen3-dev vim ros-foxy-tf-transformations \
+    ros-foxy-pcl-conversions ros-foxy-pcl-msgs ros-foxy-pcl-ros && \
     rm -rf /var/lib/apt/lists/*
+
 RUN pip install transforms3d 
 WORKDIR /SIMP
 COPY ncore ncore
 COPY ros2_ws ros2_ws
-RUN cd ncore && mkdir build && cd build && cmake .. -DBUILD_TESTING=1 && make -j12 
+#RUN cd ncore && mkdir build && cd build && cmake .. -DBUILD_TESTING=1 && make -j12 
 SHELL ["/bin/bash", "-c"]
-RUN cd ros2_ws && \
-    . /opt/ros/foxy/setup.bash && \
-    colcon build
+#RUN cd ros2_ws && \
+#    . /opt/ros/foxy/setup.bash && \
+#    colcon build
 
 COPY ros2_entrypoint.sh /
 RUN chmod +x /ros2_entrypoint.sh
