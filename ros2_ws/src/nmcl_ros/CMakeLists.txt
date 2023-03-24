@@ -81,14 +81,13 @@ set_target_properties(NSENSORS PROPERTIES IMPORTED_LOCATION ${CMAKE_CURRENT_SOUR
 set_target_properties(NMAP PROPERTIES IMPORTED_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/../../../ncore/build/lib/libNMAP.a)
 set_target_properties(NDL PROPERTIES IMPORTED_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/../../../ncore/build/lib/libNDL.a)
 
-add_executable(ScanMergeNode src/ScanMergeNode.cpp src/RosUtils.cpp)
-target_link_libraries(ScanMergeNode NSENSORS ${Boost_SYSTEM_LIBRARY})
-ament_target_dependencies(ScanMergeNode rclcpp std_msgs sensor_msgs nav_msgs geometry_msgs message_filters tf2 tf2_ros pcl_ros pcl_conversions OpenCV)
-
 add_executable(ConfigNMCLNode src/ConfigNMCLNode.cpp src/RosUtils.cpp)
 target_link_libraries(ConfigNMCLNode NMCL NMAP NSENSORS ${Boost_SYSTEM_LIBRARY})
 ament_target_dependencies(ConfigNMCLNode rclcpp std_msgs sensor_msgs nav_msgs geometry_msgs message_filters tf2 tf2_ros pcl_ros pcl_conversions nlohmann_json OpenCV)
 
+install(TARGETS
+ ConfigNMCLNode
+  DESTINATION lib/${PROJECT_NAME})
 
 
 install(DIRECTORY

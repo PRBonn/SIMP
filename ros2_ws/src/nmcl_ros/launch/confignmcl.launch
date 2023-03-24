@@ -1,0 +1,55 @@
+<launch>
+
+<arg name="gtTopic" default="GT"/>
+<arg name="cameraTopic" default="/camera0/color/image_raw"/>
+<arg name="jsonPath" default="$(find-pkg-share omni3d_ros)/configs/args.json"/>
+<arg name="omniTopic" default="fullomni3d"/>
+<arg name="baseLinkTF" default="/base_link"/>
+<arg name="dataFolder" default="/SIMP/ncore/data/floor/GTMap/"/>
+<arg name="omniTopic" default="omni3d"/>
+
+
+<node pkg="rviz2" exec="rviz2" name="rviz2" output="screen" args="-d $(find-pkg-share nmcl_ros)/rviz/config.rviz">
+</node>
+
+<node pkg="nmcl_ros" exec="ConfigNMCLNode" name="ConfigNMCLNode">
+ <param name="dataFolder"            value="$(var dataFolder)"/>
+  <param name="nmclconfig" value="nmcl.config"/>
+  <param name="odomTopic"            value="/odom"/>
+  <param name="mapTopic"            value="map"/>
+  <param name="triggerDist" value="0.1"/>
+  <param name="triggerAngle" value="0.03"/>
+  <param name="odomNoise" value="0.15,0.15,0.15" value-sep=","/>
+  <param name="poseTopic" value="/NMCLPose"/>
+  <param name="particleTopic" value="/Particles"/>
+  <param name="omni3dTopic" value="$(var omniTopic)"/>
+  <param name="baseLinkTF" value="$(var baseLinkTF)"/>
+</node>
+
+<node pkg="omni3d_ros" exec="GTNode" name="GTNode">
+  <param name="csvPath" value="/SIMP/data/raw_gt.csv"/> 
+ <param name="gtTopic" value="$(var gtTopic)"/> 
+  <param name="jsonPath" value="$(var jsonPath)"/>
+   <param name="cameraTopic" value="$(var cameraTopic)"/>
+</node>
+
+
+<node pkg="omni3d_ros" exec="Omni3DNode" name="Omni3DNode">
+  <param name="omniTopic" value="$(var omniTopic)"/> 
+   <param name="cameraTopic" value="[]"/>
+ <param name="modelPath" value="$(find-pkg-share omni3d_ros)/models/model_recent.pth"/> 
+  <param name="jsonPath" value="$(var jsonPath)"/>
+   <param name="configPath" value="$(find-pkg-share omni3d_ros)/configs/trained_Omni3D.yaml"/>
+</node>
+
+  <executable cmd="ros2 bag play /SIMP/data/2023-01-17-19-06-59_12/" output="screen" />
+
+ <executable cmd="ros2 run nav2_util lifecycle_bringup map_server" output="screen" />
+
+<node name="map_server" pkg="nav2_map_server" exec="map_server" output="screen">
+ <param name="yaml_filename" value="$(find-pkg-share omni3d_ros)/configs/Map.yaml"/>
+</node>
+
+
+
+</launch>

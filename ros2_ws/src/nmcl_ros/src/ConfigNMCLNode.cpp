@@ -98,16 +98,16 @@ public:
 
 		srand48(21); 
 		o_mtx = new std::mutex();  
-      	o_renmcl = NMCLFactory::Create(dataFolder + nmclconfig);  
+    o_renmcl = NMCLFactory::Create(dataFolder + nmclconfig);  
 
 		rclcpp::QoS qos(10);
-      	o_posePub = this->create_publisher<geometry_msgs::msg::PoseWithCovarianceStamped>(poseTopic, 10);
-      	o_particlePub = this->create_publisher<geometry_msgs::msg::PoseArray>(particleTopic, 10);
+  	o_posePub = this->create_publisher<geometry_msgs::msg::PoseWithCovarianceStamped>(poseTopic, 10);
+  	o_particlePub = this->create_publisher<geometry_msgs::msg::PoseArray>(particleTopic, 10);
 
-      	o_odomSub = create_subscription<nav_msgs::msg::Odometry>(odomTopic, qos, std::bind(&ConfigNMCLNode::motionCallback, this, std::placeholders::_1));
-      	o_omniSub = create_subscription<std_msgs::msg::Float32MultiArray>(omni3dTopic, qos, std::bind(&ConfigNMCLNode::omniCallback, this, std::placeholders::_1));
+  	o_odomSub = create_subscription<nav_msgs::msg::Odometry>(odomTopic, qos, std::bind(&ConfigNMCLNode::motionCallback, this, std::placeholders::_1));
+  	o_omniSub = create_subscription<std_msgs::msg::Float32MultiArray>(omni3dTopic, qos, std::bind(&ConfigNMCLNode::omniCallback, this, std::placeholders::_1));
 
-      	o_tfpose = std::make_unique<tf2_ros::TransformBroadcaster>(*this);
+  	o_tfpose = std::make_unique<tf2_ros::TransformBroadcaster>(*this);
 
 
 		RCLCPP_INFO(this->get_logger(), "ConfigNMCL::Ready!");    
