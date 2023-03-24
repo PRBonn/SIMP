@@ -6,7 +6,7 @@
 <arg name="omniTopic" default="fullomni3d"/>
 <arg name="baseLinkTF" default="/base_link"/>
 <arg name="dataFolder" default="/SIMP/ncore/data/floor/GTMap/"/>
-<arg name="omniTopic" default="omni3d"/>
+<arg name="omni3dTopic" default="omni3d"/>
 
 
 <node pkg="rviz2" exec="rviz2" name="rviz2" output="screen" args="-d $(find-pkg-share nmcl_ros)/rviz/config.rviz">
@@ -22,7 +22,7 @@
   <param name="odomNoise" value="0.15,0.15,0.15" value-sep=","/>
   <param name="poseTopic" value="/NMCLPose"/>
   <param name="particleTopic" value="/Particles"/>
-  <param name="omni3dTopic" value="$(var omniTopic)"/>
+  <param name="omni3dTopic" value="$(var omni3dTopic)"/>
   <param name="baseLinkTF" value="$(var baseLinkTF)"/>
 </node>
 
@@ -35,7 +35,7 @@
 
 
 <node pkg="omni3d_ros" exec="Omni3DNode" name="Omni3DNode">
-  <param name="omniTopic" value="$(var omniTopic)"/> 
+  <param name="omni3dTopic" value="$(var omni3dTopic)"/> 
    <param name="cameraTopic" value="[]"/>
  <param name="modelPath" value="$(find-pkg-share omni3d_ros)/models/model_recent.pth"/> 
   <param name="jsonPath" value="$(var jsonPath)"/>

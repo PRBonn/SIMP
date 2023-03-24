@@ -164,12 +164,12 @@ class Omni3DNode(Node):
         self.declare_parameter('jsonPath')
         jsonPath = self.get_parameter('jsonPath').value
         self.get_logger().info("jsonPath: %s" % (str(jsonPath),))
-        self.declare_parameter('cameraTopics')
-        cameraTopics = self.get_parameter('cameraTopics').value
-        self.get_logger().info("cameraTopics: %s" % (str(cameraTopics),))
-        self.declare_parameter('omniTopic')
-        omniTopic = self.get_parameter('omniTopic').value
-        self.get_logger().info("omniTopic: %s" % (str(omniTopic),))
+        #self.declare_parameter('cameraTopics')
+        #cameraTopics = self.get_parameter('cameraTopics').value
+        #self.get_logger().info("cameraTopics: %s" % (str(cameraTopics),))
+        self.declare_parameter('omni3dTopic')
+        omni3dTopic = self.get_parameter('omni3dTopic').value
+        self.get_logger().info("omni3dTopic: %s" % (str(omni3dTopic),))
 
         cameraTopics = ["/camera0/color/image_raw", "/camera1/color/image_raw", "/camera2/color/image_raw", "/camera3/color/image_raw"]
 
@@ -222,9 +222,9 @@ class Omni3DNode(Node):
         self.ats = ApproximateTimeSynchronizer([cam0_sub, cam1_sub, cam2_sub, cam3_sub], queue_size=1, slop=0.05)
         self.ats.registerCallback(self.callbackCombined4)
 
-        self.pred_pub = self.create_publisher(Float32MultiArray, omni3dTopic, queue_size=1)
-        self.pred_pub_debug = self.create_publisher(Image, 'omni3d_debug', queue_size=1)
-        self.marker_pub = self.create_publisher(MarkerArray, 'omni3dMarkerTopic', queue_size=1)
+        self.pred_pub = self.create_publisher(Float32MultiArray, omni3dTopic, 1)
+        self.pred_pub_debug = self.create_publisher(Image, 'omni3d_debug', 1)
+        self.marker_pub = self.create_publisher(MarkerArray, 'omni3dMarkerTopic', 1)
     
         self.get_logger().info("Omni3DNode::Ready!")
 

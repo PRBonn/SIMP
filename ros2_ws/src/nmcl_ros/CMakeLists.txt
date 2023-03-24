@@ -93,7 +93,7 @@ install(TARGETS
 install(DIRECTORY
   launch
  # config
- # rviz
+  rviz
   DESTINATION share/${PROJECT_NAME}
 )
 
