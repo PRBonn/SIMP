@@ -170,7 +170,7 @@ public:
 		std::vector<std::vector<Eigen::Vector3f>> vertices;
 		std::vector<float> confidences;
 		
-		RCLCPP_INFO(this->get_logger(), "ConfigNMCL::Callback!"); 
+		//RCLCPP_INFO(this->get_logger(), "ConfigNMCL::Callback!"); 
  		std::vector<float> detections = obj3dMsg->data;
  		int n = int(detections.size() / 26);     
  		for(int i = 0; i < n ; ++i) 

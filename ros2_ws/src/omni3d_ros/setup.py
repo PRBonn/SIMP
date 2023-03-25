@@ -41,13 +41,6 @@ setup(
     version='0.0.0',
     packages=[package_name],
     data_files=package_files(data_files, ['models/', 'launch/', 'configs/', 'rviz/', 'omni3d/' ], ['share', 'share', 'share', 'share', 'lib' ]),
-
-    #     (os.path.join('share', package_name), glob('launch/*.launch')),
-    #     (os.path.join('share', package_name), glob('configs/*')),
-    #     (os.path.join('share', package_name), glob('trained_models/*')),
-    #     (os.path.join('lib', package_name), glob('omni3d_ros/*'))
-    #     (os.path.join('lib', package_name), glob('omni3d/*'))
-    # ],
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='nickybones',
@@ -61,6 +54,7 @@ setup(
         'SIMPNode = omni3d_ros.SIMPNode:main',
         'Omni3DNode = omni3d_ros.Omni3DNode:main',
         'Omni3DMappingNode = omni3d_ros.Omni3DMappingNode:main',
+        'SemanticMapNode = omni3d_ros.SemanticMapNode:main',
         ],
     },
 )

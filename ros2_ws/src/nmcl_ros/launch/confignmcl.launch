@@ -7,7 +7,7 @@
 <arg name="baseLinkTF" default="/base_link"/>
 <arg name="dataFolder" default="/SIMP/ncore/data/floor/GTMap/"/>
 <arg name="omni3dTopic" default="omni3d"/>
-
+<arg name="mapName" default="Map"/>
 
 <node pkg="rviz2" exec="rviz2" name="rviz2" output="screen" args="-d $(find-pkg-share nmcl_ros)/rviz/config.rviz">
 </node>
@@ -42,12 +42,22 @@
    <param name="configPath" value="$(find-pkg-share omni3d_ros)/configs/trained_Omni3D.yaml"/>
 </node>
 
+  <executable cmd="sleep 3" output="screen" />
+  <!--
   <executable cmd="ros2 bag play /SIMP/data/2023-01-17-19-06-59_12/" output="screen" />
-
- <executable cmd="ros2 run nav2_util lifecycle_bringup map_server" output="screen" />
-
+-->
 <node name="map_server" pkg="nav2_map_server" exec="map_server" output="screen">
  <param name="yaml_filename" value="$(find-pkg-share omni3d_ros)/configs/Map.yaml"/>
+</node>
+ <executable cmd="ros2 lifecycle set /map_server configure" output="screen" />
+ <executable cmd="ros2 lifecycle set /map_server activate" output="screen" />
+
+
+<node pkg="omni3d_ros" exec="SemanticMapNode" name="SemanticMapNode" output="screen">
+ <param name="dataFolder"            value="$(var dataFolder)"/>
+  <param name="dataset"            value="$(find-pkg-share omni3d_ros)/configs/omnidataset.yaml"/>
+    <param name="markerTopic" value="semMap"/>
+    <param name="mapName" value="$(var mapName)"/>
 </node>
 
 
