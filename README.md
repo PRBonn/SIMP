@@ -80,7 +80,7 @@ sudo make noetic=1
 ```
 To build the Docker. Then download the external resources in the host machine
 ```bash
-cd /SIMP/ros1_ws/src/omni3d_ros && git clone https://github.com/FullMetalNicky/omni3d.git
+cd /SIMP/ros1_ws/src/ && git clone https://github.com/FullMetalNicky/omni3d.git
 cd /SIMP/ros1_ws/src/omni3d_ros && mkdir models/ && cd models/ && curl -LO https://www.ipb.uni-bonn.de/html/projects/simp/model_recent.pth
 ```
 To enable RVIZ visualization from the Docker run in the host machine
