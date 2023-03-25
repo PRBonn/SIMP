@@ -37,6 +37,76 @@ We use [Omni3D & Cube R-CNN](https://github.com/FullMetalNicky/omni3d) for objec
 
 
 ## Installation
+For our evaluation we installed the code as suggested in the native installation instructions. We provide Docker installations for both ROS 2 Foxy and ROS Noetic, but we did not evaluate our code with them so performance may vary. 
+
+### Docker Installation for ROS 2 Foxy 
+Make sure you installed Docker Engine and NVidia container so you can run Dokcer with GPU support. 
+In the `SIMP` folder run 
+```bash
+sudo make foxy=1
+```
+To build the Docker. Then download the external resources in the host machine
+```bash
+cd /SIMP/ros2_ws/src/omni3d_ros && git clone https://github.com/FullMetalNicky/omni3d.git
+cd /SIMP/ros2_ws/src/omni3d_ros && mkdir models/ && cd models/ && curl -LO https://www.ipb.uni-bonn.de/html/projects/simp/model_recent.pth
+```
+To enable RVIZ visualization from the Docker run in the host machine
+```bash
+ xhost +local:docker
+```
+To run the Docker
+```bash
+sudo make run foxy=1
+```
+Then in the Docker, build the code
+```bash
+cd ncore && mkdir build && cd build && cmake .. -DBUILD_TESTING=1 && make -j12 
+cd ros2_ws && . /opt/ros/foxy/setup.bash &&  colcon build && . install/setup.bash
+```
+
+You can run the localization node using
+```bash
+ros2 launch nmcl_ros confignmcl.launch dataFolder:="/SIMP/ncore/data/floor/GTMap/"
+```
+And the mapping node using 
+```bash
+ros2 launch omni3d_ros omni3d.launch
+```
+### Docker Installation for ROS Noetic 
+Make sure you installed Docker Engine and NVidia container so you can run Dokcer with GPU support. 
+In the `SIMP` folder run 
+```bash
+sudo make noetic=1
+```
+To build the Docker. Then download the external resources in the host machine
+```bash
+cd /SIMP/ros1_ws/src/omni3d_ros && git clone https://github.com/FullMetalNicky/omni3d.git
+cd /SIMP/ros1_ws/src/omni3d_ros && mkdir models/ && cd models/ && curl -LO https://www.ipb.uni-bonn.de/html/projects/simp/model_recent.pth
+```
+To enable RVIZ visualization from the Docker run in the host machine
+```bash
+ xhost +local:docker
+```
+To run the Docker
+```bash
+sudo make run noetic=1
+```
+Then in the Docker, build the code
+```bash
+cd ncore && mkdir build && cd build && cmake .. -DBUILD_TESTING=1 && make -j12 
+cd ros1_ws && . /opt/ros/noetic/setup.bash &&  catkin_make && source devel/setup.bash
+```
+
+You can run the localization node using
+```bash
+roslaunch nmcl_ros confignmcl.launch dataFolder:="/SIMP/ncore/data/floor/GTMap/"
+```
+And the mapping node using 
+```bash
+roslaunch omni3d_ros omni3d.launch
+```
+
+### Native Installation 
 Requirements:
 * ROS 1 - Noetic
 * OpenCV 4 
