@@ -32,7 +32,7 @@ class SemanticMapNode():
 
 
 
-		publisher = rospy.Publisher(markerTopic, MarkerArray)
+		publisher = rospy.Publisher(markerTopic, MarkerArray, queue_size=1)
 
 		yamlfile = dataFolder + mapName + ".yaml"
 		with open(yamlfile, 'r') as stream:

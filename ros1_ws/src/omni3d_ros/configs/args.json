@@ -1,6 +1,6 @@
 {
-  "gmap" :"/home/nickybones/Code/SIMP/ros1_ws/src/omni3d_ros/configs/Map.yaml",
-  "roomseg" : "/home/nickybones/Code/SIMP/ros1_ws/src/omni3d_ros/configs/roomseg.png",
+  "gmap" :"/SIMP/ros1_ws/src/omni3d_ros/configs/Map.yaml",
+  "roomseg" : "/SIMP/ros1_ws/src/omni3d_ros/configs/roomseg.png",
   "categories" : ["sink", "door", "oven", "board", "table", "box", "potted plant", "drawers", "sofa", "cabinet", "chair", "fire extinguisher", "person", "desk"],
   "yolo_conf" : [0.7, 0.5, 0.7, 0.7, 0.6, 0.7, 0.7, 0.7, 0.8, 0.7, 0.7, 0.7, 0.6, 0.7],
   "omni_conf" : [0.7, 0.0, 0.8, 0.9, 0.7, 0.0, 0.95, 0.8, 0.7, 0.9, 0.0, 0.9, 0.0, 0.8],
@@ -17,7 +17,7 @@
   "costTH" : 0.3,
   "truncTH" : 0.5,
   "skipTH" : 20,
-  "variancePath" : "/home/nickybones/Code/SIMP/ros1_ws/src/omni3d_ros/configs/variance.csv",
+  "variancePath" : "/SIMP/ros1_ws/src/omni3d_ros/configs/variance.csv",
   "K" : [380.07025146484375, 0.0, 324.4729919433594, 0.0, 379.66119384765625, 237.78517150878906, 0.0, 0.0, 1.0],
   "cam_poses" : [0.1, 0, 0, 0, 0, -0.1, 0, -1.5707963267948966, -0.1, 0, 0, 3.141592653589793, 0, 0.1, 0,  1.5707963267948966],
   "angles" : [ 0, -1.5707963267948966,3.141592653589793, 1.5707963267948966],

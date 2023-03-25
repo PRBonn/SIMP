@@ -84,22 +84,11 @@ RUN apt-get update && \
     apt-get install -y nlohmann-json3-dev libgtest-dev libeigen3-dev ros-noetic-map-server vim && \
     rm -rf /var/lib/apt/lists/*
 
+RUN pip install open3d
 WORKDIR /SIMP
-#RUN git clone https://github.com/PRBonn/SIMP.git
 COPY ncore ncore
 COPY ros1_ws ros1_ws
-RUN pip install open3d
-
-RUN cd ncore && mkdir build && cd build && cmake .. -DBUILD_TESTING=1 && make -j12 
-#RUN /bin/bash -c '. /opt/ros/noetic/setup.bash; cd SIMP/ros1_ws; catkin_make'
-#RUN cd SIMP/ros1_ws/src/omni3d_ros/ && mkdir -p trained_models/22_12_20_server_224/ && cd trained_models/22_12_20_server_224/ \
-#&& curl -LO https://www.ipb.uni-bonn.de/html/projects/simp/model_recent.pth
-
-
 SHELL ["/bin/bash", "-c"]
-RUN cd ros1_ws && \
-    . /opt/ros/noetic/setup.bash && \
-    catkin_make
 
 COPY ros_entrypoint.sh /
 RUN chmod +x /ros_entrypoint.sh

@@ -92,12 +92,7 @@ RUN pip install transforms3d
 WORKDIR /SIMP
 COPY ncore ncore
 COPY ros2_ws ros2_ws
-#RUN cd ncore && mkdir build && cd build && cmake .. -DBUILD_TESTING=1 && make -j12 
 SHELL ["/bin/bash", "-c"]
-#RUN cd ros2_ws && \
-#    . /opt/ros/foxy/setup.bash && \
-#    colcon build
-
 COPY ros2_entrypoint.sh /
 RUN chmod +x /ros2_entrypoint.sh
 ENTRYPOINT ["/ros2_entrypoint.sh"]
