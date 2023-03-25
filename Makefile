@@ -14,7 +14,7 @@ ifdef  foxy
 	 -v $(CURDIR):/SIMP simpfoxy
 endif
 ifdef noetic
-	docker run --rm -it --init   --gpus=all  --network host -e "DISPLAY" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+	docker run --rm -it --init   --gpus=all  -e "DISPLAY" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
 	 -v $(CURDIR):/SIMP simpnoetic
 endif
 ifdef jetson
