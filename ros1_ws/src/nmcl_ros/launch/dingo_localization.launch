@@ -5,7 +5,7 @@
 
   <param name="dataFolder" value="$(arg dataFolder)"/>
   <param name="nmclconfig" value="nmcl.config"/>
-  <param name="odomTopic" value="/odom"/>
+  <param name="odomTopic" value="/dingo_velocity_controller/odom"/>
   <param name="mapTopic" value="map"/>
   <param name="triggerDist" value="0.1"/>
   <param name="triggerAngle" value="0.03"/>
@@ -15,6 +15,7 @@
   <param name="baseLinkTF" value="base_link"/>
  <param name="omni3dTopic" value="omni3d"/>
   <param name="particleTopic" value="Particles"/>
+    <param name="gtTopic" value="/GT"/>
  <param name="jsonPath" value="$(find omni3d_ros)/configs/args.json"/>
 
   <node pkg="nmcl_ros" type="ConfigNMCLNode" name="ConfigNMCLNode" output="screen">
@@ -24,10 +25,14 @@
   <node pkg="omni3d_ros" type="Omni3DNode.py" name="Omni3DNode0" output="screen">
    <rosparam param="cameraTopics">["/camera0/color/image_raw", "/camera1/color/image_raw", "/camera2/color/image_raw", "/camera3/color/image_raw"]</rosparam>
     <param name="configPath" value="$(find omni3d_ros)/configs/trained_Omni3D.yaml"/>
-   <param name="modelPath" value="$(find omni3d_ros)/trained_models/22_12_20_server_224/model_recent.pth"/>
+   <param name="modelPath" value="$(find omni3d_ros)/models/model_recent.pth"/>
   </node>
 
 
+<param name="cameraTopic" value="/camera0/color/image_raw"/>
+ <node pkg="omni3d_ros" type="GTNode.py" name="GTNode0" output="screen">
+    <param name="csvPath" value="/SIMP/data/Demo/raw_gt.csv"/>
+   </node>
 
 <!-- visualization-->
 
@@ -38,5 +43,8 @@
   <node name="map_server" pkg="map_server" type="map_server" args="$(arg dataFolder)/0/Map.yaml" output="screen"/>
  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find nmcl_ros)/rviz/Omni.rviz"/> 
 </group>
+
+<node pkg="rosbag" type="play" name="player" output="screen" args="/SIMP/data/Demo/2023-02-24-10-56-43_0.bag"/>
+
 
 </launch>

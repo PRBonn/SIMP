@@ -13,7 +13,7 @@
    </node>
 
     <node pkg="omni3d_ros" type="GTNode.py" name="GTNode0" output="screen">
-    <param name="csvPath" value="/SIMP/data/raw_gt.csv"/>
+    <param name="csvPath" value="/SIMP/data/Demo/raw_gt.csv"/>
    </node>
 
        <node pkg="omni3d_ros" type="SIMPNode.py" name="SIMPNode0" output="screen">
@@ -22,8 +22,7 @@
 
 
   <node name="map_server" pkg="map_server" type="map_server" args="$(find omni3d_ros)/configs/Map.yaml" output="screen"/>
-<!--
-<node pkg="rosbag" type="play" name="player" output="screen" args="/SIMP/data/2023-01-17-19-06-59_12.bag"/>
--->
+<node pkg="rosbag" type="play" name="player" output="screen" args="/SIMP/data/Demo/2023-02-24-10-56-43_0.bag"/>
+
 
 </launch>
