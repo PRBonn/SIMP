@@ -22,7 +22,7 @@
 
 
   <node name="map_server" pkg="map_server" type="map_server" args="$(find omni3d_ros)/configs/Map.yaml" output="screen"/>
-
+<node pkg="rosbag" type="play" name="player" output="screen" args="/SIMP/data/Demo/2023-02-24-10-56-43_0.bag"/>
 
 
 </launch>
