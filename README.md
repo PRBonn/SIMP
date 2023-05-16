@@ -105,14 +105,7 @@ And the mapping node using
 ```bash
 roslaunch omni3d_ros omni3d.launch
 ```
-If you would like to play a demo rosbag (from ROS1), you can download it [here](https://www.ipb.uni-bonn.de/html/projects/simp/2023-02-24-10-56-43_0.bag) and the corresponding [ground truth file](https://www.ipb.uni-bonn.de/html/projects/simp/raw_gt.csv). Notice that this is a random recording that was not used to evaluate the localization or the mapping, and it's provided just so people can play it and see that our code actually runs. Place the files in `SIMP/data/Demo/` and you can run the localization node with 
-```bash
-roslaunch nmcl_ros dingo_localization.launch dataFolder:="/SIMP/ncore/data/floor/GTMap/"
-```
-And the mapping node with 
-```bash
-roslaunch omni3d_ros dingo_omni3d.launch
-```
+
 ### Native Installation 
 Requirements:
 * ROS 1 - Noetic
@@ -246,3 +239,13 @@ python3 demo/Predict.py --config configs/trained_Omni3D.yaml --input-folder "dat
 ### Statistical Analysis
 The statistical analysis was computed using ComputeStatsOnPred.py. It requires 3D annotaions of the ground truth objects in the global coordinate system, which are labeled only once, as a pre-processing step. The ground truth objects are matched against a list of detected objects, to provide the desired statistics. The output a file with the per class error variance, which we provide in a .csv format. Given a map (e.g. constructed by Omni3DMappingNode), the script also produces a file with per object error variance , which we provide in a .json and .csn formats.
 for generated a correct prediction list, the script from our Omni3d & Cube R-CNN fork can be used.
+
+## Demo for ROS Noetic
+If you would like to play a demo rosbag (from ROS1), you can download it [here](https://www.ipb.uni-bonn.de/html/projects/simp/2023-02-24-10-56-43_0.bag) and the corresponding [ground truth file](https://www.ipb.uni-bonn.de/html/projects/simp/raw_gt.csv). Notice that this is a random recording that was not used to evaluate the localization or the mapping, and it's provided just so people can play it and see that our code actually runs. Place the files in `SIMP/data/Demo/` and you can run the localization node with 
+```bash
+roslaunch nmcl_ros dingo_localization.launch dataFolder:="/SIMP/ncore/data/floor/GTMap/"
+```
+And the mapping node with 
+```bash
+roslaunch omni3d_ros dingo_omni3d.launch
+```
