@@ -4,7 +4,7 @@ This repository contains the implementation of the following [publication](https
 @inproceedings{zimmerman2023arxiv,
   author = {Zimmerman, Nicky and Sodano, Matteo and Marks, Elias and Behley, Jens and Stachniss, Cyrill},
   title = {{Long-Term Indoor Localization with Metric-Semantic Mapping using a Floor Plan Prior}},
-  journal = IEEE/RSJ Intl.~Conf.~on Intelligent Robots and Systems (IROS),
+  journal = {IEEE/RSJ Intl.~Conf.~on Intelligent Robots and Systems (IROS)},
   year = {2023}
 }
 ```
