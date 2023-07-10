@@ -14,7 +14,7 @@ Object-based maps are relevant for scene understanding since they integrate geom
 We exploit 3D object detections from monocular RGB frames for both, the object-based map construction, and for globally localizing in the constructed map. To tailor the approach to a target environment, we propose an efficient way of generating 3D annotations to finetune the 3D object detection model.
 We evaluate our map construction in an office building, and test our long-term localization approach on challenging sequences recorded in the same environment over nine months. The experiments suggest that our approach is suitable for constructing metric-semantic maps, and that our localization approach is robust to long-term changes. 
 Both, the mapping algorithm and the localization pipeline can run online on an onboard computer. 
-We will release an open-source C++/ROS implementation of our approach.
+We release an open-source C++/ROS implementation of our approach.
 
 ## Results
 Our live demos for both localization and mapping on the Dingo-O platform can seen in the following video:
