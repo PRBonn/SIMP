@@ -1,10 +1,10 @@
-# SIMP: Long-Term Indoor Localization with Metric-Semantic Mapping using a Floor Plan Prior
+# SIMP: Constructing Metric-Semantic Maps Using Floor Plan Priors for Long-Term Indoor Localization 
 This repository contains the implementation of the following [publication](https://arxiv.org/abs/2303.10959):
 ```bibtex
 @inproceedings{zimmerman2023iros,
   author = {Zimmerman, Nicky and Sodano, Matteo and Marks, Elias and Behley, Jens and Stachniss, Cyrill},
-  title = {{Long-Term Indoor Localization with Metric-Semantic Mapping using a Floor Plan Prior}},
-  journal = {IEEE/RSJ Intl.~Conf.~on Intelligent Robots and Systems (IROS)},
+  title = {{Constructing Metric-Semantic Maps Using Floor Plan Priors for Long-Term Indoor Localization}},
+  booktitle = {IEEE/RSJ Intl.~Conf.~on Intelligent Robots and Systems (IROS)},
   year = {2023}
 }
 ```
