@@ -211,7 +211,7 @@ class Omni3DNode():
         self.marker_pub = rospy.Publisher("omni3dMarkerTopic", MarkerArray,  queue_size=10)
 
         self.full_pred_pub = rospy.Publisher(omniTopic, Omni3DArray, queue_size=1)
-        self.clr = cm.rainbow(np.linspace(0, 1, 14))
+        self.clr = cm.rainbow(np.linspace(0, 1, len(self.cats)))
 
         rospy.loginfo("Omni3DNode::Ready!")
 
